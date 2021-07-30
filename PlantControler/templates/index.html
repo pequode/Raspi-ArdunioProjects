@@ -19,7 +19,7 @@
             padding: 10px;
            }
       h2   {
-              color: LightGray;
+              color: white;
               margin: auto;
               width: 50%;
               padding: 10px;
@@ -43,6 +43,7 @@
       }
       .UpdateSettings {
                 border: 5px outset black;
+                background-color: MediumSeaGreen;
                 text-align: center;
                 width: 50%;
                 float: left;
@@ -62,10 +63,14 @@
       .reset{
               right: 0px;
               width: 50%;
+              top: 50%;
             }
       .picturFrame{
         float: right;
-        border: 3px solid black;
+        border: 5px solid black;
+        background-color: MediumSeaGreen
+
+;
         width: 50%;
       }
       .image{
@@ -86,10 +91,40 @@
     </style>
   </head>
   <body >
+  <script>
+   var toggle = 1;
+   const picker = document.getElementById('Site');
+   var x = setInterval(function(){
+      if(toggle == 0){
+        let current= window.location;
+        console.log(current.origin);
+        window.location.replace(current.origin + "/");
+      }
+      toggle = 0;
+
+   },1000*2*60)
+
+   var y = setInterval(function(){
+      if(eventeLexists == 0){
+        document.addEventListener('mousemove', myListener, false);
+        eventeLexists =1;
+      }
+   },1000);
+   var eventeLexists = 0;
+   var myListener = function () {
+       document.removeEventListener('mousemove', myListener, false);
+       eventeLexists = 0;
+       toggle = 1;
+       console.log("mouseMoved");
+   };
+
+
+
+  </script>
   <div class ="header" style="text-align: center;" >
     <h1>The Plant Waterer Delux2000: Silver Edition</h1><br>
   </div>
-  <div class ="containter">
+  <div class ="containter" >
     <div class="UpdateSettings" >
       <h2>Current Settings</h2><br>
       <div class="controls">
@@ -118,7 +153,7 @@
           </table>
         </div>
         <div class="buttons">
-            <form action="/toggle_fan" method="post">
+            <form action="/toggle_fan" method="post" id='Site'>
                <input type="image" src="{{ url_for('static', filename=fanButton) }}" width="100" height="100"/>
             </form>
             <form action="/toggle_light" method="post">
@@ -146,7 +181,7 @@
               </select><br>
               <input type="submit" name="getInfo" value="Update">
         </form>
-        <div class="reset">
+        <div class="reset" style="top: 50%;">
           <form action="/sendDefault" method="post">
             <input type="submit" name="getInfo" value="Reset">
           </form>

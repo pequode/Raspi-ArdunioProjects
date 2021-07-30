@@ -11,11 +11,11 @@ def updateList(path):
     for i in range(len(ListOfVals)):
         k = int(file1.readline())
         ListOfVals[i]=k
-        print(k)
+        #print(k)
     file1.close()
     return ListOfVals
 def updateFile(IList):
-    file1 = open("conf/conf.txt","w")
+    file1 = open("waterer/conf/conf.txt","w")
     for i in range(len(IList)):
         file1.write(str(IList[i])+"\n")
     file1.close()
@@ -34,13 +34,23 @@ def giveCorrectPath(IList):
     else:
         tup[2]= "light0.gif"
     return tup
-
+def TakePicture():
+    pygame.camera.init()
+    pygame.camera.list_cameras() #Camera detected or not
+    cam = pygame.camera.Camera("/dev/video0",(300,300))
+    cam.start()
+    img = cam.get_image()
+    ts = str(time.time())
+    path = "photos/pic-"+ts.replace(".", "-")+".jpg"
+    pygame.image.save(img,"static/"+path)
+    cam.stop()
+    return path
 
 
 
 @app.route("/")
 def buttonTest():
-    ListOfVals = updateList("conf/conf.txt")
+    ListOfVals = updateList("waterer/conf/conf.txt")
     state = giveCorrectPath(ListOfVals)
     return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name="main.png",WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
 
@@ -49,42 +59,43 @@ def buttonTest():
 @app.route("/toggle_fan",methods=["POST"])
 def fanToggle():
 
-    ListOfVals = updateList("conf/conf.txt")
+    ListOfVals = updateList("waterer/conf/conf.txt")
     ListOfVals[4] =int(not(ListOfVals[4]))
 
     updateFile(ListOfVals)
     state = giveCorrectPath(ListOfVals)
-
-    return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name="main.png",WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
+    path = TakePicture()
+    return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name=path,WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
 
 @app.route("/toggle_light",methods=["POST"])
 def lightToggle():
-
-    ListOfVals = updateList("conf/conf.txt")
+    ListOfVals = updateList("waterer/conf/conf.txt")
     ListOfVals[7] =int(not(ListOfVals[7]))
     updateFile(ListOfVals)
     state = giveCorrectPath(ListOfVals)
-    return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name="main.png",WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
+    path = TakePicture()
+    return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name=path,WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
 
 @app.route("/toggle_water",methods=["POST"])
 def waterToggle():
-    ListOfVals = updateList("conf/conf.txt")
+    ListOfVals = updateList("waterer/conf/conf.txt")
     ListOfVals[1] =int(not(ListOfVals[1]))
     updateFile(ListOfVals)
     state = giveCorrectPath(ListOfVals)
-
-    return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name="main.png",WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
+    path = TakePicture()
+    return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name=path,WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
 
 
 @app.route("/sendDefault",methods=["POST"])
 def defaultReset():
-    ListOfVals = updateList("conf/default.txt")
+    ListOfVals = updateList("waterer/conf/default.txt")
     updateFile(ListOfVals)
     state = giveCorrectPath(ListOfVals)
     return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0], name="main.png",WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
+
 @app.route("/send",methods=["POST"])
 def FormSubmission():
-    ListOfVals = updateList("conf/conf.txt")
+    ListOfVals = updateList("waterer/conf/conf.txt")
     n = int(request.form.get("numberIn"))
     type = str(request.form.get("Relay"))
     if (type == "FOT"):
@@ -101,20 +112,14 @@ def FormSubmission():
         ListOfVals [2]= n
     updateFile(ListOfVals)
     state = giveCorrectPath(ListOfVals)
-    return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name="main.png",WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
+    path = TakePicture()
+    return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name=path,WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
+
 
 @app.route("/wantPic",methods=["POST"])
 def updatePic():
-   ListOfVals = updateList("conf/conf.txt")
-   pygame.camera.init()
-   pygame.camera.list_cameras() #Camera detected or not
-   cam = pygame.camera.Camera("/dev/video0",(300,300))
-   cam.start()
-   img = cam.get_image()
-   ts = str(time.time())
-   path = "photos/pic-"+ts.replace(".", "-")+".jpg"
-   pygame.image.save(img,"static/"+path)
-   cam.stop()
+   ListOfVals = updateList("waterer/conf/conf.txt")
+   path = TakePicture()
    state = giveCorrectPath(ListOfVals)
    return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name=path,WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
 

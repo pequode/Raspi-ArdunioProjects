@@ -1,5 +1,4 @@
 #include "conf.h"
-
 using namespace std;
 ofstream outfile;
 vector<int> Confs{-1,-1,-1,-1,-1,-1,-1,-1,-1,-69,-68};//last is always true second to last is always false
@@ -16,6 +15,20 @@ void printOutput(string K){
   outfile.close();
   sem_post(&Signal1);//bad to use same sem
 }
+void writeVector(){
+  sem_wait(&Signal1);//bad to use same sem
+  outfile.open("testFile.txt");
+  for(int i =0 ; i<Confs.size();i++){
+    outfile << Confs[i] << "\n";
+  }
+  if(DEBUG){
+    for(int i =0 ; i<Confs.size();i++){
+      cout << Confs[i] << "\n";
+    }
+  }
+  outfile.close();
+  sem_post(&Signal1);//bad to use same sem
+}
 void ReadTimeingsFile(){
     sem_wait(&Signal1);
     ifstream input_file(ConfPath);
@@ -25,75 +38,92 @@ void ReadTimeingsFile(){
     }
     int number;
     for (int i =0; i<((int)Confs.size()) && input_file >> number;i++)
-     {
-        //cout << number << "; ";
+    {
         Confs[i] = number;
     }
     input_file.close();
     sem_post(&Signal1);
-    cout<<"Done Read\n\n";
+    if(DEBUG) cout<<"Done Read\n\n";
 }
-void waitTime(int idForSleepSeconds,int idForReset){
+
+int waitTime(int idForSleepSeconds,int idForReset){
    int i;
    int Reset = 0;
    for (i=0;i<Confs[idForSleepSeconds];i++){
        delay (1000);
-       Reset = 0;//Confs[idForReset] need to be able to rewrite that val to 0;
-       if(Reset){
-         i =0;
-         // set Confs[idForReset] to 0 in file;
-       }
        if (i%10 == 0){
           ReadTimeingsFile();
        }
+
+       if((idForSleepSeconds == waterRestartIntervalSec ||
+           idForSleepSeconds == fanRestartIntervalSec   ||
+           idForSleepSeconds == lightRestartIntervalSec) &&  Confs[idForReset] == 1
+         )
+        {
+         return 1;
+        }
+       else if(
+         (idForSleepSeconds == waterTimeInd ||
+          idForSleepSeconds == fanTimeInd   ||
+          idForSleepSeconds == lightTimeInd) &&  Confs[idForReset] == 0
+        ){
+          return 0;
+        }
+
+
+
    }
+   if(idForSleepSeconds == waterRestartIntervalSec ||
+       idForSleepSeconds == fanRestartIntervalSec   ||
+       idForSleepSeconds == lightRestartIntervalSec){
+      Confs[idForReset] = 1;
+   }else{
+      Confs[idForReset] = 0;
+   }
+   writeVector();
+   return -1;
 }
 void* wateringCycle(void* arg){
    while(true){
-    printOutput("\nStarting Watering: ");
-   // printOutput("before sem water: ");
     ReadTimeingsFile();
-    //printOutput("after sem water: ");
 
     digitalWrite (Water, HIGH);
+    printOutput("Starting Watering: ");
     waitTime(waterTimeInd,Confs.size()-2);
+
     digitalWrite (Water,  LOW);
     printOutput("Water Off: ");
     waitTime(waterRestartIntervalSec,waterRestartTimerInd);
 
-   // printOutput("\nEnding Watering: ");
    }
     return NULL;
 }
 void* fanCycle(void* arg){
  while(true){
-  printOutput("\nStarting Vent: ");
- //printOutput("before sem fan: ");
   ReadTimeingsFile();
- //printOutput("\nafter sem fan: ");
 
   digitalWrite (Fans, HIGH);
+  printOutput("Starting Vent: ");
   waitTime(fanTimeInd,Confs.size()-2);
+
   digitalWrite (Fans,  LOW);
   printOutput("Vent Off: ");
   waitTime(fanRestartIntervalSec,fanRestartTimerInd);
- // printOutput("\nEnding Vent: ");
  }
  return NULL;
 }
 void* lightTimer(void* arg){
   while(true){
-  //printOutput("\nLights On: ");
-  //printOutput("\nbefore semifore light Timer: ");
-  ReadTimeingsFile();
-  //printOutput("After semifore Light Timer: ");
-  printOutput("Lights Off: ");
-  digitalWrite (Lights, LOW);
-  waitTime(lightTimeInd,Confs.size()-2);
-  digitalWrite (Lights,  HIGH);
-  printOutput("Lights On: ");
-  waitTime(lightRestartIntervalSec,lightRestartTimerInd);
-  //printOutput("Lights Off: ");
+    ReadTimeingsFile();
+
+    digitalWrite (Lights,  HIGH);
+    printOutput("Lights On: ");
+    waitTime(lightRestartIntervalSec,lightRestartTimerInd);
+
+    digitalWrite (Lights, LOW);
+    printOutput("Lights Off: ");
+    waitTime(lightTimeInd,Confs.size()-2);
+
   }
   return NULL;
 }
@@ -141,8 +171,7 @@ int main (void)
   digitalWrite (Water,  LOW);
   digitalWrite (Fans,  LOW);
 
-  cout << "Killed Program\n";
+  if(DEBUG)cout << "Killed Program\n";
 
   return 0 ;
 }
-
