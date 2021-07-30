@@ -1,0 +1,42 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Plant View</title>
+    <script
+        type="text/javascript"
+        src="https://www.maths.nottingham.ac.uk/plp/pmadw/LaTeXMathML.js">
+    </script>
+    <script src="{{url_for('static', filename='gardener.js')}}"></script>
+
+    <link rel="shortcut icon" href="/static/phots/image.ico" type="image/x-icon">
+
+    <style>
+      body {background-color: ForestGreen;
+          }
+      h1   {color: Gainsboro;
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+           }
+      p    {color: Gainsboro;
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+           }
+      div  {
+            margin: auto;
+            width: 50%;
+            }
+      form {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+  <dev>
+  {% block body %}{% endblock %}
+</dev>
+  </body>
+</html>

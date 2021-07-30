@@ -1,0 +1,166 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Plant View</title>
+    <script
+        type="text/javascript"
+        src="https://www.maths.nottingham.ac.uk/plp/pmadw/LaTeXMathML.js">
+    </script>
+    <script src="{{url_for('static', filename='gardener.js')}}"></script>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='image.ico') }}">
+
+    <style>
+      body {background-color: ForestGreen;
+          }
+      h1   {color: Gainsboro;
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+           }
+      h2   {
+              color: LightGray;
+              margin: auto;
+              width: 50%;
+              padding: 10px;
+
+      }
+      td, th {
+          border: 1px solid Gainsboro;
+          text-align: left;
+          padding: 8px;
+      }
+      p    {color: Gainsboro;
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+           }
+
+      form {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+      }
+      .UpdateSettings {
+                border: 5px outset black;
+                text-align: center;
+                width: 50%;
+                float: left;
+             }
+      .table {
+        left: 0px;
+        width: 50%;
+      }
+      .selector{
+                margin: auto;
+                width: 50%;
+                border: 3px solid white;
+                padding: 10px;
+                display: flex;
+                left: 10px;
+               }
+      .reset{
+              right: 0px;
+              width: 50%;
+            }
+      .picturFrame{
+        float: right;
+        border: 3px solid black;
+        width: 50%;
+      }
+      .image{
+        float: center;
+        padding: 50px;
+      }
+      .containter{
+        display: flex;
+      }
+      .controls{
+        display: flex;
+      }
+      .buttons{
+        display: flex;
+        top: 50%;
+
+      }
+    </style>
+  </head>
+  <body >
+  <div class ="header" style="text-align: center;" >
+    <h1>The Plant Waterer Delux2000: Silver Edition</h1><br>
+  </div>
+  <div class ="containter">
+    <div class="UpdateSettings" >
+      <h2>Current Settings</h2><br>
+      <div class="controls">
+        <div class=table>
+          <table>
+            <tr>
+              <th>Powered</th>
+              <th>Time On </th>
+              <th>Time Between On Periods</th>
+            </tr>
+            <tr>
+              <td>Fan</td>
+              <td>       {{FanOnT}}</td>
+              <td>       {{FanOffT}}</td>
+            </tr>
+            <tr>
+              <td>Lights</td>
+              <td>       {{LightOnT}}</td>
+              <td>       {{LightOffT}}</td>
+            </tr>
+            <tr>
+              <td>Water Pump</td>
+              <td>       {{WaterOnT}}</td>
+              <td>       {{WaterOffT}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="buttons">
+            <form action="/toggle_fan" method="post">
+               <input type="image" src="{{ url_for('static', filename=fanButton) }}" width="100" height="100"/>
+            </form>
+            <form action="/toggle_light" method="post">
+                 <input type="image" src="{{ url_for('static', filename=lightButton) }}" width="100" height="100"/>
+            </form>
+            <form action="/toggle_water" method="post">
+              <input type="image" src="{{ url_for('static', filename=waterButton) }}" width="100" height="100"/>
+            </form>
+        </div>
+      </div>
+
+      <div class="selector">
+        <form action="/send" method="post">
+              <label for="fname">Time in Seconds:</label><br>
+              <input type="number" id="Amount" name="numberIn" value=0 min=0 max=2047483640 ><br>
+              <label for="Relays">Pick a device:</label><br>
+              <select id="TypeOF" name="Relay">
+                <option value="non"></option>
+                <option value="FOT">Fan On Time</option>
+                <option value="FOFT">Fan Off Time</option>
+                <option value="LOT">Light On Time</option>
+                <option value="LOFT">Light Off Time</option>
+                <option value="WOT">Water On Time</option>
+                <option value="WOFT">Water Off Time</option>
+              </select><br>
+              <input type="submit" name="getInfo" value="Update">
+        </form>
+        <div class="reset">
+          <form action="/sendDefault" method="post">
+            <input type="submit" name="getInfo" value="Reset">
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="picturFrame">
+      <form action="/wantPic" method="post">
+        <input type="submit" name="getInfo" value="Update Picture">
+      </form>
+        <img src="{{ url_for('static', filename=name) }}" class="image" width="500" height="500"/>
+
+    </div>
+  </div>
+  </body>
+</html>
