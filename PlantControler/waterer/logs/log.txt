@@ -1,0 +1,272 @@
+
+Starting Watering: 2021:7:26:24:56:23
+
+Lights On: 2021:7:26:24:56:23
+
+Starting Vent: 2021:7:26:24:56:23
+
+Starting Vent: 2021:7:26:24:62:48
+
+Lights On: 2021:7:26:24:62:48
+
+Starting Watering: 2021:7:26:24:62:48
+
+Ending Vent: 2021:7:26:25:64:51
+
+Starting Vent: 2021:7:26:25:64:51
+
+Ending Vent: 2021:7:26:26:66:51
+
+Starting Vent: 2021:7:26:26:66:51
+
+Ending Vent: 2021:7:26:27:68:51
+
+Starting Vent: 2021:7:26:27:68:51
+
+Ending Vent: 2021:7:26:28:70:52
+
+Starting Vent: 2021:7:26:28:70:52
+
+Ending Vent: 2021:7:27:5:72:52
+
+Starting Vent: 2021:7:27:5:72:52
+
+Ending Vent: 2021:7:27:6:74:53
+
+Starting Vent: 2021:7:27:6:74:53
+
+Ending Vent: 2021:7:27:7:76:53
+
+Starting Vent: 2021:7:27:7:76:53
+
+Ending Watering: 2021:7:27:8:63:24
+
+Starting Watering: 2021:7:27:8:63:24
+
+Ending Vent: 2021:7:27:8:78:54
+
+Starting Vent: 2021:7:27:8:78:54
+
+Starting Watering: 2021:7:27:9:63:41
+
+Starting Vent: 2021:7:27:9:63:41
+Lights Off: 2021:7:27:9:63:41
+Water Off: 2021:7:27:9:64:11
+Vent Off: 2021:7:27:9:65:41
+Lights On: 2021:7:27:10:63:41
+
+Starting Vent: 2021:7:27:10:65:41
+Vent Off: 2021:7:27:10:67:42
+
+Starting Vent: 2021:7:27:11:67:42
+Vent Off: 2021:7:27:11:69:42
+
+Starting Vent: 2021:7:27:12:69:42
+Vent Off: 2021:7:27:12:71:42
+
+Starting Vent: 2021:7:27:13:71:43
+Vent Off: 2021:7:27:13:73:43
+
+Starting Vent: 2021:7:27:14:73:43
+Vent Off: 2021:7:27:14:75:43
+
+Starting Vent: 2021:7:27:15:75:44
+Vent Off: 2021:7:27:15:77:44
+
+Starting Vent: 2021:7:27:16:77:44
+Vent Off: 2021:7:27:16:79:44
+
+Starting Watering: 2021:7:27:17:64:15
+Water Off: 2021:7:27:17:64:45
+
+Starting Vent: 2021:7:27:17:79:45
+Vent Off: 2021:7:27:17:81:45
+
+Starting Vent: 2021:7:27:18:81:45
+Vent Off: 2021:7:27:18:83:45
+
+Starting Vent: 2021:7:27:19:83:46
+Vent Off: 2021:7:27:19:85:46
+
+Starting Vent: 2021:7:27:20:85:46
+Vent Off: 2021:7:27:20:87:46
+
+Starting Vent: 2021:7:27:21:87:47
+Vent Off: 2021:7:27:21:89:47
+
+Starting Vent: 2021:7:27:22:89:47
+Vent Off: 2021:7:27:23:31:47
+
+Starting Vent: 2021:7:27:24:31:48
+Vent Off: 2021:7:27:24:33:48
+
+Starting Vent: 2021:7:27:25:33:48
+Vent Off: 2021:7:27:25:35:48
+
+Starting Watering: 2021:7:27:25:64:48
+Water Off: 2021:7:27:25:65:18
+
+Starting Vent: 2021:7:27:26:35:49
+Vent Off: 2021:7:27:26:37:49
+
+Starting Vent: 2021:7:27:27:37:49
+Vent Off: 2021:7:27:27:39:49
+
+Starting Vent: 2021:7:27:28:39:49
+Vent Off: 2021:7:27:28:41:50
+
+Starting Vent: 2021:7:28:5:41:50
+Vent Off: 2021:7:28:5:43:50
+
+Starting Vent: 2021:7:28:6:43:50
+Vent Off: 2021:7:28:6:45:50
+
+Starting Vent: 2021:7:28:7:45:51
+Vent Off: 2021:7:28:7:47:51
+
+Starting Vent: 2021:7:28:8:47:51
+Vent Off: 2021:7:28:8:49:51
+
+Starting Vent: 2021:7:28:9:49:52
+Vent Off: 2021:7:28:9:51:52
+Lights Off: 2021:7:28:9:63:52
+
+Starting Watering: 2021:7:28:9:65:22
+Water Off: 2021:7:28:9:65:52
+
+Starting Vent: 2021:7:28:10:51:52
+Vent Off: 2021:7:28:10:53:52
+Lights On: 2021:7:28:10:63:52
+
+Starting Vent: 2021:7:28:11:53:53
+Vent Off: 2021:7:28:11:55:53
+
+Starting Vent: 2021:7:28:12:55:53
+Vent Off: 2021:7:28:12:57:53
+
+Starting Vent: 2021:7:28:13:57:54
+Vent Off: 2021:7:28:13:59:54
+
+Starting Vent: 2021:7:28:14:59:54
+Vent Off: 2021:7:28:14:61:54
+
+Starting Vent: 2021:7:28:15:61:55
+Vent Off: 2021:7:28:15:63:55
+
+Starting Vent: 2021:7:28:16:63:55
+Vent Off: 2021:7:28:16:65:55
+
+Starting Watering: 2021:7:28:17:65:56
+
+Starting Vent: 2021:7:28:17:65:56
+Water Off: 2021:7:28:17:66:26
+Vent Off: 2021:7:28:17:67:56
+
+Starting Vent: 2021:7:28:18:67:56
+Vent Off: 2021:7:28:18:69:56
+
+Starting Vent: 2021:7:28:19:69:57
+Vent Off: 2021:7:28:19:71:57
+
+Starting Watering: 2021:7:29:6:38:37
+
+Starting Vent: 2021:7:29:6:38:37
+Lights Off: 2021:7:29:6:38:38
+Water Off: 2021:7:29:6:39:10
+Vent Off: 2021:7:29:6:40:40
+Lights On: 2021:7:29:7:38:40
+
+Starting Vent: 2021:7:29:7:40:40
+Vent Off: 2021:7:29:7:42:40
+
+Starting Vent: 2021:7:29:8:42:41
+Vent Off: 2021:7:29:8:44:41
+
+Starting Vent: 2021:7:29:9:44:41
+Vent Off: 2021:7:29:9:46:41
+
+Starting Vent: 2021:7:29:10:46:42
+Vent Off: 2021:7:29:10:48:42
+
+Starting Vent: 2021:7:29:11:48:42
+Vent Off: 2021:7:29:11:50:42
+
+Starting Vent: 2021:7:29:12:50:42
+Vent Off: 2021:7:29:12:52:42
+
+Starting Vent: 2021:7:29:13:52:43
+Vent Off: 2021:7:29:13:54:43
+
+Starting Watering: 2021:7:29:14:39:13
+Water Off: 2021:7:29:14:39:43
+
+Starting Vent: 2021:7:29:14:54:43
+Vent Off: 2021:7:29:14:56:43
+
+Starting Vent: 2021:7:29:15:56:44
+Vent Off: 2021:7:29:15:58:44
+
+Starting Vent: 2021:7:29:16:58:44
+Vent Off: 2021:7:29:16:60:44
+
+Starting Vent: 2021:7:29:17:60:45
+Vent Off: 2021:7:29:17:62:45
+
+Starting Vent: 2021:7:29:18:62:45
+Vent Off: 2021:7:29:18:64:45
+
+Starting Vent: 2021:7:29:19:64:46
+Vent Off: 2021:7:29:19:66:46
+
+Starting Vent: 2021:7:29:20:66:46
+Vent Off: 2021:7:29:20:68:46
+
+Starting Vent: 2021:7:29:21:68:47
+Vent Off: 2021:7:29:21:70:47
+
+Starting Watering: 2021:7:29:22:39:47
+Water Off: 2021:7:29:22:40:17
+
+Starting Vent: 2021:7:29:22:70:47
+Vent Off: 2021:7:29:22:72:47
+
+Starting Vent: 2021:7:29:23:72:47
+Vent Off: 2021:7:29:23:74:47
+
+Starting Vent: 2021:7:29:24:74:48
+Vent Off: 2021:7:29:24:76:48
+
+Starting Vent: 2021:7:29:25:76:48
+Vent Off: 2021:7:29:25:78:48
+
+Starting Vent: 2021:7:29:26:78:49
+Vent Off: 2021:7:29:26:80:49
+
+Starting Vent: 2021:7:29:27:80:49
+Vent Off: 2021:7:29:27:82:49
+
+Starting Vent: 2021:7:29:28:82:50
+Vent Off: 2021:7:29:28:84:50
+
+Starting Vent: 2021:7:30:5:84:50
+Vent Off: 2021:7:30:5:86:50
+Lights Off: 2021:7:30:6:38:50
+
+Starting Watering: 2021:7:30:6:40:20
+Water Off: 2021:7:30:6:40:50
+
+Starting Vent: 2021:7:30:6:86:51
+Vent Off: 2021:7:30:6:88:51
+Lights On: 2021:7:30:7:38:51
+
+Starting Vent: 2021:7:30:7:88:51
+Vent Off: 2021:7:30:8:30:51
+
+Starting Vent: 2021:7:30:9:30:52
+Vent Off: 2021:7:30:9:32:52
+
+Starting Vent: 2021:7:30:10:32:52
+Vent Off: 2021:7:30:10:34:52
+
+Starting Vent: 2021:7:30:11:34:52
+Vent Off: 2021:7:30:11:36:52
