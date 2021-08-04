@@ -54,7 +54,7 @@ int waitTime(int idForSleepSeconds,int idForReset){
        if (i%10 == 0){
           ReadTimeingsFile();
        }
-
+ /*
        if((idForSleepSeconds == waterRestartIntervalSec ||
            idForSleepSeconds == fanRestartIntervalSec   ||
            idForSleepSeconds == lightRestartIntervalSec) &&  Confs[idForReset] == 1
@@ -75,18 +75,19 @@ int waitTime(int idForSleepSeconds,int idForReset){
           writeVector();
           return 0;
         }
-
+*/
 
 
    }
-   if(idForSleepSeconds == waterRestartIntervalSec ||
+  /
+  /* if(idForSleepSeconds == waterRestartIntervalSec ||
        idForSleepSeconds == fanRestartIntervalSec   ||
        idForSleepSeconds == lightRestartIntervalSec){
       Confs[idForReset] = 1;
    }else{
       Confs[idForReset] = 0;
    }
-   writeVector();
+   writeVector*/
    cout << "done Reg\n";
    return -1;
 }
