@@ -96,7 +96,7 @@ void* wateringCycle(void* arg){
 
     digitalWrite (Water, HIGH);
     printOutput("Starting Watering: ");
-    waitTime(waterTimeInd,Confs.size()-2);
+    waitTime(waterTimeInd,waterRestartTimerInd);
 
     digitalWrite (Water,  LOW);
     printOutput("Water Off: ");
@@ -111,7 +111,7 @@ void* fanCycle(void* arg){
 
   digitalWrite (Fans, HIGH);
   printOutput("Starting Vent: ");
-  waitTime(fanTimeInd,Confs.size()-2);
+  waitTime(fanTimeInd,fanRestartTimerInd);
 
   digitalWrite (Fans,  LOW);
   printOutput("Vent Off: ");
@@ -129,7 +129,7 @@ void* lightTimer(void* arg){
 
     digitalWrite (Lights, LOW);
     printOutput("Lights Off: ");
-    waitTime(lightTimeInd,Confs.size()-2);
+    waitTime(lightTimeInd,lightRestartTimerInd);
 
   }
   return NULL;
