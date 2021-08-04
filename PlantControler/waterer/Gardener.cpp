@@ -18,11 +18,11 @@ void printOutput(string K){
 void writeVector(){
   sem_wait(&Signal1);//bad to use same sem
   outfile.open("testFile.txt");
-  for(int i =0 ; i<Confs.size();i++){
+  for(int i =0 ; i<int(Confs.size());i++){
     outfile << Confs[i] << "\n";
   }
   if(DEBUG){
-    for(int i =0 ; i<Confs.size();i++){
+    for(int i =0 ; i<int(Confs.size());i++){
       cout << Confs[i] << "\n";
     }
   }
@@ -48,7 +48,7 @@ void ReadTimeingsFile(){
 
 int waitTime(int idForSleepSeconds,int idForReset){
    int i;
-   int Reset = 0;
+   //int Reset = 0;
    for (i=0;i<Confs[idForSleepSeconds];i++){
        delay (1000);
        if (i%10 == 0){
