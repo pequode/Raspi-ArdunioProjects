@@ -60,6 +60,9 @@ int waitTime(int idForSleepSeconds,int idForReset){
            idForSleepSeconds == lightRestartIntervalSec) &&  Confs[idForReset] == 1
          )
         {
+         cout << "meant to be off but on\n";
+         Confs[idForReset] = 1;
+         writeVector();
          return 1;
         }
        else if(
@@ -67,6 +70,9 @@ int waitTime(int idForSleepSeconds,int idForReset){
           idForSleepSeconds == fanTimeInd   ||
           idForSleepSeconds == lightTimeInd) &&  Confs[idForReset] == 0
         ){
+          cout << "meant to be on but off\n";
+          Confs[idForReset] = 0;
+          writeVector();
           return 0;
         }
 
@@ -81,6 +87,7 @@ int waitTime(int idForSleepSeconds,int idForReset){
       Confs[idForReset] = 0;
    }
    writeVector();
+   cout << "done Reg\n";
    return -1;
 }
 void* wateringCycle(void* arg){
