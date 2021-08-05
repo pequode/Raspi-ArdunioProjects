@@ -79,7 +79,7 @@ int waitTime(int idForSleepSeconds,int idForReset){
 
 
    }
-  /
+  
   /* if(idForSleepSeconds == waterRestartIntervalSec ||
        idForSleepSeconds == fanRestartIntervalSec   ||
        idForSleepSeconds == lightRestartIntervalSec){
