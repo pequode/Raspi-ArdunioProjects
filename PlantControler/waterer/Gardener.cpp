@@ -18,8 +18,10 @@ void printOutput(string K){
 
 void writeVector(){
   sem_wait(&Signal1);//bad to use same sem
-  if(DEBUG)outfile.open("cont_debug.txt");
-  else outfile.open(ConfPath);
+  string writePath;
+  if(DEBUG)writePath = "cont_debug.txt";
+  else writePath = ConfPath;
+  outfile.open(writePath);
   for(int i =0 ; i<int(Confs.size());i++){
     outfile << Confs[i] << "\n";
   }
@@ -34,12 +36,14 @@ void writeVector(){
 
 void ReadTimeingsFile(){
     sem_wait(&Signal1);
-    if(!DEBUG) ifstream input_file(ConfPath);
-    else ifstream input_file("cont_debug.txt");
-
+    string readPath;
+    if(!DEBUG) readPath = ConfPath;
+    else readPath = "cont_debug.txt";
+    ifstream input_file(readPath);
+    
     while (!input_file.is_open()){
       if(!DEBUG)printOutput("ERR:Conf-file is already open sleeping for 5 seconds");
-      else cout<< "file open waiting \n"
+      else cout<< "file open waiting \n";
       sleep(5);
     }
     int number;
@@ -73,7 +77,7 @@ int waitTime(int idForSleepSeconds,int idForReset){
            else if(
              (idForSleepSeconds == waterTimeInd ||
               idForSleepSeconds == fanTimeInd   ||
-              idForSleepSeconds == lightTimeInd) s
+              idForSleepSeconds == lightTimeInd) 
               &&  Confs[idForReset] == 0
               ){
               cout << "meant to be on but off -- shouldnt be printed without website\n";
