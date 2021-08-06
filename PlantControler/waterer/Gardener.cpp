@@ -40,7 +40,7 @@ void ReadTimeingsFile(){
     if(!DEBUG) readPath = ConfPath;
     else readPath = "cont_debug.txt";
     ifstream input_file(readPath);
-    
+
     while (!input_file.is_open()){
       if(!DEBUG)printOutput("ERR:Conf-file is already open sleeping for 5 seconds");
       else cout<< "file open waiting \n";
@@ -63,13 +63,13 @@ int waitTime(int idForSleepSeconds,int idForReset){
        if (i%10 == 0){
           ReadTimeingsFile();
        }
-       if (DEBUG){
+       if (1){
            if((idForSleepSeconds == waterRestartIntervalSec ||
                idForSleepSeconds == fanRestartIntervalSec   ||
                idForSleepSeconds == lightRestartIntervalSec) &&  Confs[idForReset] == 1
              )
             {
-             cout << "meant to be off but on -- shouldnt be printed without website\n";
+             if (DEBUG)cout << "meant to be off but on -- shouldnt be printed without website\n";
              Confs[idForReset] = 1;
              writeVector();
              return 1;
@@ -77,10 +77,10 @@ int waitTime(int idForSleepSeconds,int idForReset){
            else if(
              (idForSleepSeconds == waterTimeInd ||
               idForSleepSeconds == fanTimeInd   ||
-              idForSleepSeconds == lightTimeInd) 
+              idForSleepSeconds == lightTimeInd)
               &&  Confs[idForReset] == 0
               ){
-              cout << "meant to be on but off -- shouldnt be printed without website\n";
+              if (DEBUG) cout << "meant to be on but off -- shouldnt be printed without website\n";
               Confs[idForReset] = 0;
               writeVector();
               return 0;
@@ -91,7 +91,7 @@ int waitTime(int idForSleepSeconds,int idForReset){
 
    }
 
-    if (DEBUG){
+    if (1){
        if(idForSleepSeconds == waterRestartIntervalSec ||
            idForSleepSeconds == fanRestartIntervalSec   ||
            idForSleepSeconds == lightRestartIntervalSec){
@@ -100,7 +100,7 @@ int waitTime(int idForSleepSeconds,int idForReset){
           Confs[idForReset] = 0;
        }
        writeVector();
-       cout<<"l99 ish just ran\n";
+       if (DEBUG)cout<<"l99 ish just ran\n";
     }
    if (DEBUG) cout << "done Reg\n";
    return -1;
