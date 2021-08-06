@@ -25,7 +25,7 @@
 #define GPIO_PIN4 6
 #define LogPath "logs/log.txt"
 #define ConfPath "conf/conf.txt"
-#define DEBUG 1
+#define DEBUG 0
 
 int waterTimeInd = 0;
 int waterRestartTimerInd = 1;

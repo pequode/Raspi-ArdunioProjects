@@ -3,7 +3,7 @@ import pygame
 import pygame.camera
 import time
 app = Flask(__name__)
-dEbug = True
+dEbug = False
 if (dEbug):
     pathToConf = "waterer/cont_debug.txt"
 else:

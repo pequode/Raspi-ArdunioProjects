@@ -986,3 +986,10 @@ Starting Vent: 2021:8:5:28:76:39
 Vent Off: 2021:8:5:28:78:39
 Starting Vent: 2021:8:6:5:78:39
 Vent Off: 2021:8:6:5:80:39
+Starting Vent: 2021:8:6:6:80:40
+Vent Off: 2021:8:6:6:82:40
+Starting Vent: 2021:8:6:7:40:46
+Starting Watering: 2021:8:6:7:40:46
+Lights On: 2021:8:6:7:40:46
+Water Off: 2021:8:6:7:41:16
+Vent Off: 2021:8:6:7:42:46
