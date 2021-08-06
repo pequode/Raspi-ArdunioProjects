@@ -3,7 +3,11 @@ import pygame
 import pygame.camera
 import time
 app = Flask(__name__)
-
+dEbug = True
+if (dEbug):
+    pathToConf = "waterer/cont_debug.txt"
+else:
+    pathToConf = "waterer/conf/conf.txt"
 
 def updateList(path):
     ListOfVals = [0,0,1,1,1,1,0,0,0]
@@ -14,11 +18,13 @@ def updateList(path):
         #print(k)
     file1.close()
     return ListOfVals
+
 def updateFile(IList):
-    file1 = open("waterer/conf/conf.txt","w")
+    file1 = open(pathToConf,"w")
     for i in range(len(IList)):
         file1.write(str(IList[i])+"\n")
     file1.close()
+
 def giveCorrectPath(IList):
     tup = ["nul","nul","nul"]
     if (IList[1]):
@@ -50,7 +56,7 @@ def TakePicture():
 
 @app.route("/")
 def buttonTest():
-    ListOfVals = updateList("waterer/conf/conf.txt")
+    ListOfVals = updateList(pathToConf)
     state = giveCorrectPath(ListOfVals)
     return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name="main.png",WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
 
@@ -59,7 +65,7 @@ def buttonTest():
 @app.route("/toggle_fan",methods=["POST"])
 def fanToggle():
 
-    ListOfVals = updateList("waterer/conf/conf.txt")
+    ListOfVals = updateList(pathToConf)
     ListOfVals[4] =int(not(ListOfVals[4]))
 
     updateFile(ListOfVals)
@@ -69,7 +75,7 @@ def fanToggle():
 
 @app.route("/toggle_light",methods=["POST"])
 def lightToggle():
-    ListOfVals = updateList("waterer/conf/conf.txt")
+    ListOfVals = updateList(pathToConf)
     ListOfVals[7] =int(not(ListOfVals[7]))
     updateFile(ListOfVals)
     state = giveCorrectPath(ListOfVals)
@@ -78,7 +84,7 @@ def lightToggle():
 
 @app.route("/toggle_water",methods=["POST"])
 def waterToggle():
-    ListOfVals = updateList("waterer/conf/conf.txt")
+    ListOfVals = updateList(pathToConf)
     ListOfVals[1] =int(not(ListOfVals[1]))
     updateFile(ListOfVals)
     state = giveCorrectPath(ListOfVals)
@@ -95,7 +101,7 @@ def defaultReset():
 
 @app.route("/send",methods=["POST"])
 def FormSubmission():
-    ListOfVals = updateList("waterer/conf/conf.txt")
+    ListOfVals = updateList(pathToConf)
     n = int(request.form.get("numberIn"))
     type = str(request.form.get("Relay"))
     if (type == "FOT"):
@@ -118,7 +124,7 @@ def FormSubmission():
 
 @app.route("/wantPic",methods=["POST"])
 def updatePic():
-   ListOfVals = updateList("waterer/conf/conf.txt")
+   ListOfVals = updateList(pathToConf)
    path = TakePicture()
    state = giveCorrectPath(ListOfVals)
    return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name=path,WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
