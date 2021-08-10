@@ -81,7 +81,7 @@
         display: flex;
       }
       .controls{
-        display: flex;
+
       }
       .buttons{
         display: flex;
@@ -154,13 +154,13 @@
         </div>
         <div class="buttons">
             <form action="/toggle_fan" method="post" id='Site'>
-               <input type="image" src="{{ url_for('static', filename=fanButton) }}" width="100" height="100"/>
+               <input type="image" alt="fanstatus" src="{{ url_for('static', filename=fanButton) }}" width="33%" height="100"/>
             </form>
             <form action="/toggle_light" method="post">
-                 <input type="image" src="{{ url_for('static', filename=lightButton) }}" width="100" height="100"/>
+                 <input type="image" alt="lightstatus" src="{{ url_for('static', filename=lightButton) }}" width="33%" height="100"/>
             </form>
             <form action="/toggle_water" method="post">
-              <input type="image" src="{{ url_for('static', filename=waterButton) }}" width="100" height="100"/>
+              <input type="image" alt="pump status" src="{{ url_for('static', filename=waterButton) }}" width="33%" height="15%"/>
             </form>
         </div>
       </div>
@@ -193,7 +193,7 @@
       <form action="/wantPic" method="post">
         <input type="submit" name="getInfo" value="Update Picture">
       </form>
-        <img src="{{ url_for('static', filename=name) }}" class="image" width="500" height="500"/>
+        <img src="{{ url_for('static', filename=name) }}" class="image" max width="500" max height="500" alt = "picture of plant"/>
 
     </div>
   </div>
