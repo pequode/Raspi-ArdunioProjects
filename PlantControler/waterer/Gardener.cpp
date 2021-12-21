@@ -1,10 +1,11 @@
 #include "conf.h"
 using namespace std;
+// main file used for watering plants
 ofstream outfile;
 vector<int> Confs{-1,-1,-1,-1,-1,-1,-1,-1,-1,-69,-68};//last is always true second to last is always false
-
+// semaphore acting as a mutex to stop race condition
 sem_t Signal1;
-
+//writes data to log file
 void printOutput(string K){
   sem_wait(&Signal1);//bad to use same sem
   outfile.open(LogPath,ios_base::app);
@@ -15,7 +16,7 @@ void printOutput(string K){
   outfile.close();
   sem_post(&Signal1);//bad to use same sem
 }
-
+// used to update the config file for the web servers use and the use of the program if restarted
 void writeVector(){
   sem_wait(&Signal1);//bad to use same sem
   string writePath;
@@ -33,7 +34,7 @@ void writeVector(){
   outfile.close();
   sem_post(&Signal1);//bad to use same sem
 }
-
+// get a vector from the config file updates global Confs vector
 void ReadTimeingsFile(){
     sem_wait(&Signal1);
     string readPath;
@@ -55,7 +56,7 @@ void ReadTimeingsFile(){
     sem_post(&Signal1);
     if(DEBUG) cout<<"Done Read\n";
 }
-
+// get a delay time and wait that long, but check for interupts every second
 int waitTime(int idForSleepSeconds,int idForReset){
    int i;
    for (i=0;i<Confs[idForSleepSeconds];i++){
@@ -105,6 +106,7 @@ int waitTime(int idForSleepSeconds,int idForReset){
    if (DEBUG) cout << "done Reg\n";
    return -1;
 }
+// threaded function used for watering the plant
 void* wateringCycle(void* arg){
    while(true){
       ReadTimeingsFile();
@@ -124,6 +126,7 @@ void* wateringCycle(void* arg){
    }
     return NULL;
 }
+// threaded function used for decreasing humidity by running air from outside
 void* fanCycle(void* arg){
  while(true){
     ReadTimeingsFile();
@@ -142,6 +145,7 @@ void* fanCycle(void* arg){
  }
  return NULL;
 }
+// threaded function used for lighing the plant
 void* lightTimer(void* arg){
   while(true){
     ReadTimeingsFile();
@@ -162,6 +166,7 @@ void* lightTimer(void* arg){
   return NULL;
 }
 
+// checks for a kill signal and lets it fail safe for the RaspberryPi
 void signal_callback_handler(int signum) {
    if(DEBUG)cout << "Signal Caught" << signum << endl;
 
@@ -173,29 +178,36 @@ void signal_callback_handler(int signum) {
    exit(signum);
 }
 
+
 int main (void)
 {
-  if (!DEBUG)wiringPiSetup();
-  if (!DEBUG)pinMode (Water, OUTPUT) ;
-  if (!DEBUG)pinMode (Fans, OUTPUT) ;
-  if (!DEBUG)pinMode (Lights, OUTPUT) ;
+  // initialize the pins
+  if (!DEBUG){
+    wiringPiSetup();
+    pinMode (Water, OUTPUT) ;
+    pinMode (Fans, OUTPUT) ;
+    pinMode (Lights, OUTPUT) ;
 
-  if (!DEBUG)digitalWrite (Lights,  LOW);
-  if (!DEBUG)digitalWrite (Water,  LOW);
-  if (!DEBUG)digitalWrite (Fans,  LOW);
+    digitalWrite (Lights,  LOW);
+    digitalWrite (Water,  LOW);
+    digitalWrite (Fans,  LOW);
+  }
+  //create the signal signal handler
   signal(SIGINT, signal_callback_handler);
+  // startup delay to allow web server to boot
   if (!DEBUG)delay(10000);
   else cout << "skipping line \n";
   if (!DEBUG)digitalWrite (Lights,  HIGH);
-
+  // initialize sem
   sem_init(&Signal1, 0, 1);
   time_t now = time(0);
+  // each function acts as a thread
   if(DEBUG)cout << "  Example seconds is : "<< now <<endl;
   pthread_t threads[3];
   pthread_create(&threads[0],NULL,wateringCycle,NULL);
   pthread_create(&threads[1],NULL,fanCycle,NULL);
   pthread_create(&threads[2],NULL,lightTimer,NULL);
-
+  // done so main isnt run
   pthread_join(threads[0],NULL);
   pthread_join(threads[1],NULL);
   pthread_join(threads[2],NULL);
@@ -205,7 +217,7 @@ int main (void)
   if (!DEBUG)digitalWrite (Lights,  LOW);
   if (!DEBUG)digitalWrite (Water,  LOW);
   if (!DEBUG)digitalWrite (Fans,  LOW);
-
+  // sig sev should stop this from being reached but it still fails safe
   if(DEBUG)cout << "Killed Program never should happen\n";
 
   return 0 ;

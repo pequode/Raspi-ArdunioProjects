@@ -9,6 +9,8 @@
 #define BMP_SCK 20
 #define BMP_MOSI 31
 #define SEALEVELPRESSURE_HPA (1013.25)
+// this is the combined code for our first prototype of the rocket design. 
+
 
 //Why is it that when we move the functions to the bottom of the code, it stops working???
 
@@ -34,7 +36,7 @@ int yRawMin = tolerance;
 int yRawMax = tolerance;
 int zRawMin = tolerance;
 int zRawMax = tolerance;
- 
+
 // Take multiple samples to reduce noise
 const int sampleSize = 10;
 
@@ -60,11 +62,11 @@ void AutoCalibrate(int xRaw, int yRaw, int zRaw){
 }
 
 
-void setup() 
+void setup()
 {
   Serial.begin(115200);
   while (!Serial);
-  
+
   Serial.println("BMP388 test and Accel test");
 
   if (!bmp.begin()) {
@@ -75,7 +77,7 @@ void setup()
   bmp.setTemperatureOversampling(BMP3_OVERSAMPLING_8X);
   bmp.setPressureOversampling(BMP3_OVERSAMPLING_4X);
   bmp.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_3);
- 
+
   int xRaw = ReadAxis(xInput);
   int yRaw = ReadAxis(yInput);
   int zRaw = ReadAxis(zInput);
@@ -108,7 +110,7 @@ void setup()
 
 }
   }
-void loop() 
+void loop()
 {
     //I2C Accelerometer
     sensors_event_t aevent, mevent;
@@ -146,5 +148,5 @@ void loop()
   Serial.print("  ");
   Serial.println("rad/s ");
   delay(500);
- 
+
 }

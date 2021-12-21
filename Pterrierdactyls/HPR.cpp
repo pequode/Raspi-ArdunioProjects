@@ -3,12 +3,12 @@ using namespace std;
 float currentTime = 0,lastTime = 0,
 Altitude = 0,Appoge =0, expectedAppoge =0,
 MaxImpulse = 0, MaxV =0,LastV;
-
+// this file is a test file to test the formula for calcuating Appoge
 void appocgeCalc(){
 	float a = 0;//getAccel();
 	if( (a+9.8) > 0 ){
-		float currentImpulse = a + 9.8;// rough estimate of impulse not including drag 
-		if (currentImpulse>MaxImpulse) MaxImpulse =currentImpulse; // saves max force 
+		float currentImpulse = a + 9.8;// rough estimate of impulse not including drag
+		if (currentImpulse>MaxImpulse) MaxImpulse =currentImpulse; // saves max force
 	}
 
 	currentTime = 0; //millis()/1000;

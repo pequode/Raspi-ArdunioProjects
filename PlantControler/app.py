@@ -8,7 +8,8 @@ if (dEbug):
     pathToConf = "waterer/cont_debug.txt"
 else:
     pathToConf = "waterer/conf/conf.txt"
-
+# function used to take a list of toggle values, pre defined in config conf.txt
+# should use a bool for space effeciency but more readable this way.
 def updateList(path):
     ListOfVals = [0,0,1,1,1,1,0,0,0]
     file1 = open(path,"r")
@@ -18,13 +19,13 @@ def updateList(path):
         #print(k)
     file1.close()
     return ListOfVals
-
+# this is used to change config file back after a method has been run
 def updateFile(IList):
     file1 = open(pathToConf,"w")
     for i in range(len(IList)):
         file1.write(str(IList[i])+"\n")
     file1.close()
-
+# this is used to get right image for the website display to show that corrisponds to the actuator states
 def giveCorrectPath(IList):
     tup = ["nul","nul","nul"]
     if (IList[1]):
@@ -40,6 +41,7 @@ def giveCorrectPath(IList):
     else:
         tup[2]= "light0.gif"
     return tup
+# used to generate an image for display on website
 def TakePicture():
     pygame.camera.init()
     pygame.camera.list_cameras() #Camera detected or not
@@ -51,17 +53,13 @@ def TakePicture():
     pygame.image.save(img,"static/"+path)
     cam.stop()
     return path
-
-
-
+#Here is the web server stuff
 @app.route("/")
 def buttonTest():
     ListOfVals = updateList(pathToConf)
     state = giveCorrectPath(ListOfVals)
     return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name="main.png",WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
-
-
-
+#After toggle button on fan hit
 @app.route("/toggle_fan",methods=["POST"])
 def fanToggle():
 
@@ -72,7 +70,7 @@ def fanToggle():
     state = giveCorrectPath(ListOfVals)
     path = TakePicture()
     return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name=path,WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
-
+#After toggle button on light hit
 @app.route("/toggle_light",methods=["POST"])
 def lightToggle():
     ListOfVals = updateList(pathToConf)
@@ -81,7 +79,7 @@ def lightToggle():
     state = giveCorrectPath(ListOfVals)
     path = TakePicture()
     return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name=path,WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
-
+#After toggle button on water hit
 @app.route("/toggle_water",methods=["POST"])
 def waterToggle():
     ListOfVals = updateList(pathToConf)
@@ -90,15 +88,14 @@ def waterToggle():
     state = giveCorrectPath(ListOfVals)
     path = TakePicture()
     return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name=path,WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
-
-
+# After reset hit
 @app.route("/sendDefault",methods=["POST"])
 def defaultReset():
     ListOfVals = updateList("waterer/conf/default.txt")
     updateFile(ListOfVals)
     state = giveCorrectPath(ListOfVals)
     return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0], name="main.png",WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
-
+# used when updated configs are sent
 @app.route("/send",methods=["POST"])
 def FormSubmission():
     ListOfVals = updateList(pathToConf)
@@ -121,7 +118,7 @@ def FormSubmission():
     path = TakePicture()
     return render_template("index.html",fanButton=state[1],lightButton=state[2],waterButton=state[0],name=path,WaterOnT=ListOfVals[0],WaterOffT=ListOfVals[2],FanOnT=ListOfVals[3],FanOffT=ListOfVals[5],LightOnT=ListOfVals[6],LightOffT=ListOfVals[8])
 
-
+# used to get new picture of plant
 @app.route("/wantPic",methods=["POST"])
 def updatePic():
    ListOfVals = updateList(pathToConf)

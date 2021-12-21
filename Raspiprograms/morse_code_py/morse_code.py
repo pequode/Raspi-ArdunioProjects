@@ -10,8 +10,8 @@ import sys
 import time
 
 import pigpio
-
-#A conversion dictionary from ascii to morse code 
+# a simple program to have a light blink in morse_code given a input string
+#A conversion dictionary from ascii to morse code
 morse={
 'a':'.-'   , 'b':'-...' , 'c':'-.-.' , 'd':'-..'  , 'e':'.'    ,
 'f':'..-.' , 'g':'--.'  , 'h':'....' , 'i':'..'   , 'j':'.---' ,
@@ -22,7 +22,7 @@ morse={
 '5':'.....', '6':'-....', '7':'--...', '8':'---..', '9':'----.',
 '0':'-----'}
 
-#formatting for different types of delays 
+#formatting for different types of delays
 NONE=0
 
 DASH=3
@@ -92,4 +92,3 @@ while pi.wave_tx_busy():
    time.sleep(0.1)
 
 pi.stop() # disconnect from Pi
-
