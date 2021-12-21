@@ -30,6 +30,6 @@ Some of the code posted here requires additional library downloads. For those I 
      - A webcam plugged into the RaspberryPi (to provide the website with a picture of the plant)
      - 5x custom wired receptacles (so that the project could be re-purposed later)
 * **Pterrierdactyls- Boston University Rocket Propulsion Group's High Powered Rocket Competition**
- - I participated in BURPG's HPR competition. I was responsible for getting the 2 adafruit feather micro-controllers to communicate with each other and the IMU to get data about its orientation. Additionally I was in charge of creating a method for the rocket to predict when it would be at it highest point. This folder holds all these programs. There would be more code but This project was during 2020 and the Pandemic led to the project being canceled. All of the posted code worked.
+  - I participated in BURPG's HPR competition. I was responsible for getting the 2 adafruit feather micro-controllers to communicate with each other and the IMU to get data about its orientation. Additionally I was in charge of creating a method for the rocket to predict when it would be at it highest point. This folder holds all these programs. There would be more code but This project was during 2020 and the Pandemic led to the project being canceled. All of the posted code worked.
 * **RaspberryPi Programs**
- - This folder contains different small projects with the RaspberryPi that aren't large enough to be their own folder. 
+  - This folder contains different small projects with the RaspberryPi that aren't large enough to be their own folder. 
